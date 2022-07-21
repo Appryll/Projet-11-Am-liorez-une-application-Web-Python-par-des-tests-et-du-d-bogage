@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}Summary | GUDLFT Registration{% endblock %}
+
+{% block navbar %} 
+<ul class="navbar-nav ml-0">
+    <li class="nav-item d-inline-flex">
+        <h5 class="p-1">Welcome, {{club['email']}}</h5><a class="nav-link" href="{{url_for('logout')}}">Logout</a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block body %}
+
+    {% with messages = get_flashed_messages()%}
+
+    {% if messages %}
+        <ul>
+       {% for message in messages %}
+            <li>{{message}}</li>
+        {% endfor %}
+       </ul>
+    {% endif %}
+
+    <div class="container mt-4">
+
+        <h3>Competitions</h3>
+        <hr>
+
+        <p class="text-uppercase text-muted">Points available: {{club['points']}}</p>
+        <hr>
+    
+        <table class="table table-success table-striped" id="table-welcome">
+            <thead>
+                <tr>
+                  <th scope="col">Nom</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Number of Places</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for comp in competitions %}
+                <tr>
+                  <td>{{comp['name']}}</td> 
+                  <td>{{comp['date']}}</td>
+                  <td>{{comp['numberOfPlaces']}}</td>    
+                {% if comp['numberOfPlaces']|int >0 %}
+                  <td><a href="{{ url_for('book',competition=comp['name'],club=club['name']) }}">Book Places</a></td>
+                {% endif %}  
+                </tr>
+                {% endfor %}
+    
+              </tbody>
+        </table>
+
+    </div>
+
+    {% endwith %}
+
+{% endblock %}

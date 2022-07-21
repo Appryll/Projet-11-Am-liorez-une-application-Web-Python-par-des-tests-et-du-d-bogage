@@ -23,7 +23,7 @@ Dans Windows Powershell, naviguer vers le dossier souhaité.
     $ pip install -r requirements.txt
 
 ###### - Démarrer le serveur de developpement
-    > set FLASK_APP=app
+    > set FLASK_APP=run
     > flask run
 
     Le site sera accéssible à l'adresse local : 127.0.0.1:5000 sur le port 5000 par défaut.
@@ -52,7 +52,7 @@ Dans le terminal, naviguer vers le dossier souhaité.
     $ pip install -r requirements.txt
 
 ###### - Démarrer le serveur de developpement :
-    $ export FLASK_APP=app
+    $ export FLASK_APP=run
     $ flask run
 
     Le site sera accéssible à l'adresse local : 127.0.0.1:5000 sur le port 5000 par défaut.

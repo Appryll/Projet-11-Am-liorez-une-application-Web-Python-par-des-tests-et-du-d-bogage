@@ -1,0 +1,51 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+.card{
+    margin-top: 8%;
+}
+
+footer {
+    height:40px; 
+    width: 100%; 
+    background-attachment: scroll;
+    background-color: #e5e5e5;
+    position: fixed;
+    bottom: 0pt;
+    left: 0pt;
+    position: absolute,
+}
+
+#table-welcome{
+    width: 65%;
+    margin: auto;
+}
+
+h2{
+    background: #2B6695;
+    border-radius: 6px 6px 6px 6px;
+    box-shadow: 0 0 0 1px #5F5A4B, 1px 1px 6px 1px rgba(10, 10, 0, 0.5);
+    color: #FFFFFF;
+    font-family: "Microsoft YaHei", "Tahoma", "boldface", Arial;
+    font-size: 24px;
+    font-weight: bold;
+    height: 46px;
+    line-height: 25px;
+    margin: 18px 0 !important;
+    padding: 8px 0 5px 5px;
+    text-shadow: 2px 2px 3px #222222;
+}
+
+.box{
+    width: 43%;
+    margin: auto;
+    padding: 3%;
+    border-style: groove;
+}

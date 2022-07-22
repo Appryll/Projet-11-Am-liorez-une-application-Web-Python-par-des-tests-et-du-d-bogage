@@ -1,6 +1,6 @@
 from app import app
 from server import loadClubs, loadCompetitions
-from flask import render_template, redirect, flash, request, url_for
+from flask import render_template, redirect, flash, request, url_for, session
 
 competitions = loadCompetitions()
 clubs = loadClubs()
@@ -9,10 +9,15 @@ clubs = loadClubs()
 def index():
     return render_template('index.html')
 
-@app.route('/showSummary',methods=['POST'])
+
+@app.route('/showSummary', methods=['POST'])
 def showSummary():
-    club = [club for club in clubs if club['email'] == request.form['email']][0]
-    return render_template('welcome.html',club=club,competitions=competitions)
+    if request.method == 'POST':
+        user= request.form['email']
+        session["user"] = user
+
+        club = [club for club in clubs if club['email'] == request.form['email']][0]
+        return render_template('welcome.html', club=club, competitions=competitions, user=user)
 
 
 @app.route('/book/<competition>/<club>')
@@ -41,4 +46,5 @@ def purchasePlaces():
 
 @app.route('/logout')
 def logout():
+    session.pop("user", None)
     return redirect(url_for('index'))

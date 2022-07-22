@@ -2,14 +2,6 @@
 
 {% block title %}Summary | GUDLFT Registration{% endblock %}
 
-{% block navbar %} 
-<ul class="navbar-nav ml-0">
-    <li class="nav-item d-inline-flex">
-        <h5 class="p-1">Welcome, {{club['email']}}</h5><a class="nav-link" href="{{url_for('logout')}}">Logout</a>
-    </li>
-</ul>
-{% endblock %}
-
 {% block body %}
 
     {% with messages = get_flashed_messages()%}

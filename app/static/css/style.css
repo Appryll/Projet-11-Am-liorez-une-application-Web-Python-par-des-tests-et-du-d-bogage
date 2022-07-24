@@ -50,9 +50,8 @@ h2{
     border-style: groove;
 }
 
-.alert-warning{
+.alert{
     width: 50%;
     margin: auto;
     text-align: center;
-    color: red;
 }

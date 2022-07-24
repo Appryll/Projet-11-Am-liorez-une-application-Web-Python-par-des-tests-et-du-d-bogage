@@ -26,6 +26,7 @@ def showSummary():
                 flash('Please, enter your email address.')
             else:
                 flash('Sorry, that email wasn\'t found. Please try again.')
+
             return render_template('index.html'), 401
 
 

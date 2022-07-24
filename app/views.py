@@ -22,7 +22,7 @@ def showSummary():
             if request.form['email'] == '':
                 flash('Please, enter your email address.')
             else:
-                flash('Sorry, that email wasn\'t found. Please try again.')
+                flash('Sorry, that email is not valid. Please try again.')
             return render_template('index.html'), 401
 
 

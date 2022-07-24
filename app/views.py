@@ -9,6 +9,7 @@ clubs = loadClubs()
 def index():
     return render_template('index.html')
 
+
 # ERROR: Entering a unknown email crashes the app
 # Code should be written to ensure that if something goes wrong (like the email isn't found), 
 # the error is caught and handled. Display an error message like "Sorry, that email wasn't found." 
@@ -21,8 +22,11 @@ def showSummary():
             club = [club for club in clubs if club['email'] == request.form['email']][0]
             return render_template('welcome.html', club=club, competitions=competitions, user=user)
         except:
-            flash('Sorry, that email wasn\'t found.')
-            return render_template('index.html', club=club)
+            if request.form['email'] == '':
+                flash('Please, enter your email address.')
+            else:
+                flash('Sorry, that email wasn\'t found. Please try again.')
+            return render_template('index.html'), 401
 
 
 @app.route('/book/<competition>/<club>')

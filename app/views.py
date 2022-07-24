@@ -9,6 +9,7 @@ clubs = loadClubs()
 def index():
     return render_template('index.html')
 
+
 # ERROR: Entering a unknown email crashes the app
 # Code should be written to ensure that if something goes wrong (like the email isn't found), 
 # the error is caught and handled. Display an error message like "Sorry, that email wasn't found." 
@@ -24,7 +25,8 @@ def showSummary():
             if request.form['email'] == '':
                 flash('Please, enter your email address.')
             else:
-                flash('Sorry, that email wasn\'t found.')
+                flash('Sorry, that email wasn\'t found. Please try again.')
+
             return render_template('index.html'), 401
 
 

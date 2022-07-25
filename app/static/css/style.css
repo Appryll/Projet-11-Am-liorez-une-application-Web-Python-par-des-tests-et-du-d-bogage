@@ -55,3 +55,12 @@ h2{
     margin: auto;
     text-align: center;
 }
+
+#table-points_club, thead, tbody {
+    text-align: center;
+}
+
+#table-points_club{
+    width: 60%;
+    margin: auto;
+}

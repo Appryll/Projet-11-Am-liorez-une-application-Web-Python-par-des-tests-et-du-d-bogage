@@ -1,9 +1,9 @@
-
 {% extends "base.html" %}
 
 {% block title %}Booking for {{competition['name']}} || GUDLFT{% endblock %}
 
 {% block body %}
+
 <div class="container mt-4">
 
     {% with messages = get_flashed_messages(with_categories=true) %}
@@ -33,22 +33,19 @@
                         <label for="places" class="col-form-label">How many places?</label>
                     </div>
                     <div class="col-auto">
-                        <input type="number" id="inputPassword6" class="form-control" name="places" aria-describedby="passwordHelpInline" max="{{competition['numberOfPlaces']}}"min="1">
+                        <input type="number" id="inputPassword6" class="form-control" name="places" aria-describedby="passwordHelpInline" required>
                     </div>    
                     <div class="col-auto">
                         <button class="btn btn-primary btn-sm" type="submit">Book</button>
                     </div>
                 </div>
                 <div class="col-auto">
-                        <span id="passwordHelpInline" class="form-text">
-                        You have {{club['points']}} places available.
-                        {# from the {{comp['numberOfPlaces']}} free places #}
-                        </span>
+                        <span id="passwordHelpInline" class="form-text">You have {{club['points']}} places available.</span>
                 </div>    
             </div>
         </form>
     </div>  
-
+    
 </div>
 
 {% endblock %}

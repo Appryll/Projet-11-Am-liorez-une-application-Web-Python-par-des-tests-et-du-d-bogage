@@ -1,40 +1,51 @@
-
 {% extends "base.html" %}
 
 {% block title %}Booking for {{competition['name']}} || GUDLFT{% endblock %}
 
 {% block body %}
+
 <div class="container mt-4">
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      
+      {% for category, message in messages %}
+      <div class="alert alert-{{ category }} mt-4" role="alert">
+        <h5>{{ message }}</h5>
+      </div>
+      {% endfor %}
+      
+    {% endif %}
+  {% endwith %}
 
     <h2>{{competition['name']}}</h2>
 
     <div class="container mt-2">
-        <p class="text-uppercase text-muted">Points available: {{club['points']}}</p>
+        <p class="text-uppercase text-muted">Places available: {{competition['numberOfPlaces']}}</p>
         <hr>
 
         <form action="/purchasePlaces" method="post">
             <div class="box">
                 <div class="row align-items-center">
+                    <input type="hidden" name="club" value="{{club['name']}}">
+                    <input type="hidden" name="competition" value="{{competition['name']}}">
                     <div class="col-auto">
-                        <label for="inputPassword6" class="col-form-label">How many places?</label>
+                        <label for="places" class="col-form-label">How many places?</label>
                     </div>
                     <div class="col-auto">
-                        <input type="number" id="inputPassword6" class="form-control" name="places" aria-describedby="passwordHelpInline">
+                        <input type="number" id="inputPassword6" class="form-control" name="places" aria-describedby="passwordHelpInline" required>
                     </div>    
                     <div class="col-auto">
                         <button class="btn btn-primary btn-sm" type="submit">Book</button>
                     </div>
                 </div>
                 <div class="col-auto">
-                        <span id="passwordHelpInline" class="form-text">
-                        You have between 0 and {{club['points']}} passes available.
-                        {# from the {{comp['numberOfPlaces']}} free places #}
-                        </span>
+                        <span id="passwordHelpInline" class="form-text">You have {{club['points']}} places available.</span>
                 </div>    
             </div>
         </form>
     </div>  
-
+    
 </div>
 
 {% endblock %}

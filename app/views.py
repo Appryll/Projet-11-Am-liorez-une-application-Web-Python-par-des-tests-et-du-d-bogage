@@ -47,7 +47,7 @@ def purchasePlaces():
 
     # Places required greater than those available by the club and less than or equal to the places for the competition
     if places_required > int(club['points']) and places_required <= places_available:
-        flash('Error! You try to use more places than you have available', 'danger')
+        flash('Error! You try to use more places than you have available.', 'danger')
         return render_template('booking.html',club=club, competition=competition)
     # Required places greater than those available for the competition
     elif places_required > places_available:
@@ -55,14 +55,14 @@ def purchasePlaces():
         return render_template('booking.html', club=club, competition=competition)
     # Places greater than 12 because the maximum per club is 12
     elif places_required > MAX_POINTS:
-        flash(f'Sorry! It is only possible to reserve between 0 and {MAX_POINTS} places in each competition', 'warning')
+        flash(f'Sorry! It is only possible to reserve between 0 and {MAX_POINTS} places in each competition.', 'warning')
         return render_template('booking.html', club=club, competition=competition)
     # Reserve 0 places or negative
     elif places_required <= 0:
-        flash('Error! You cannot reserve null or negative places', 'danger')
+        flash('Error! You cannot reserve null or negative places.', 'danger')
         return render_template('booking.html', club=club, competition=competition)
     else:
-        flash('Great-booking complete!', 'info')
+        flash('Great-booking complete!.', 'info')
         club['points'] = int(club['points']) - places_required
         competition['numberOfPlaces'] = int(competition['numberOfPlaces']) - places_required
         return render_template('welcome.html', club=club, competitions=competitions)

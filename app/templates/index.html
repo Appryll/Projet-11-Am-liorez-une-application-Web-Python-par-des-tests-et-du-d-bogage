@@ -16,7 +16,7 @@
   {% endif %}
 {% endwith %}
 
-
+{% if not "user" in session %}
 <div class="card mx-auto" style="max-width: 1000px;">
     <div class="row mx-auto mb-4">
       <h1>Welcome to the GUDLFT Registration Portal</h1>
@@ -41,4 +41,30 @@
 
     </div>
   </div>
+{% endif %}
+
+<div class="cont-welcome">
+
+  <h3>Points available for each club</h3>
+  <hr>
+
+  <table class="table table-hover table-warning mt-4" id="table-points_club">
+      <thead>
+          <tr>
+            <th scope="col">Club Nom</th>
+            <th scope="col">Number of points availables</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for club in clubs %}
+          <tr>
+            <td>{{club['name']}}</td> 
+            <td>{{club['points']}}</td>    
+          </tr>
+          {% endfor %}
+        </tbody>
+  </table>
+
+</div>
+
 {% endblock %}

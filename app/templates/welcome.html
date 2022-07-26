@@ -16,12 +16,13 @@
   {% endif %}
 {% endwith %}
 
-    <div class="container mt-4">
-
+    <div class="container">
+        <h5 class="p-1" id="welcome">Welcome, {{club['email']}}</h5>
+        
         <h3>Competitions</h3>
         <hr>
 
-        <p class="text-uppercase text-muted">Points available: {{club['points']}}</p>
+        <p class="text-uppercase text-muted">Club points available : {{club['points']}}</p>
         <hr>
     
         <table class="table table-success table-striped" id="table-welcome">

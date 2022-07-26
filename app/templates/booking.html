@@ -21,7 +21,7 @@
     <h2>{{competition['name']}}</h2>
 
     <div class="container mt-2">
-        <p class="text-uppercase text-muted">Places available: {{competition['numberOfPlaces']}}</p>
+        <p class="text-uppercase text-muted">Competitions places available : {{competition['numberOfPlaces']}}</p>
         <hr>
 
         <form action="/purchasePlaces" method="post">
@@ -40,7 +40,7 @@
                     </div>
                 </div>
                 <div class="col-auto">
-                        <span id="passwordHelpInline" class="form-text">You have {{club['points']}} places available.</span>
+                        <span id="passwordHelpInline" class="form-text">You have {{club['points']}} points available.</span>
                 </div>    
             </div>
         </form>

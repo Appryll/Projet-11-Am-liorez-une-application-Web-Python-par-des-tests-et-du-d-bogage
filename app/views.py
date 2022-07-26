@@ -6,18 +6,18 @@ competitions = loadCompetitions()
 clubs = loadClubs()
 MAX_POINTS = 12
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def index():
-    return render_template('index.html')
+    return render_template('index.html', clubs=clubs)
     
 
 @app.route('/showSummary', methods=['POST'])
 def showSummary():
     if request.method == 'POST':
         try:
+            club = [club for club in clubs if club['email'] == request.form['email']][0]
             user= request.form['email']
             session["user"] = user
-            club = [club for club in clubs if club['email'] == request.form['email']][0]
             return render_template('welcome.html', club=club, competitions=competitions, user=user)
         except:
             if request.form['email'] == '':
@@ -66,12 +66,6 @@ def purchasePlaces():
         club['points'] = int(club['points']) - places_required
         competition['numberOfPlaces'] = int(competition['numberOfPlaces']) - places_required
         return render_template('welcome.html', club=club, competitions=competitions)
-
-
-# TODO: Add route for points display
-@app.route('/pointsAvailable', methods=['GET'])
-def pointsAvailable():
-    return render_template('points_available_club.html', clubs=clubs)
 
 
 @app.route('/logout')

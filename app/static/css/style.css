@@ -9,7 +9,7 @@ html{
 }
 
 .card{
-    margin-top: 8%;
+    margin-top: 2%;
 }
 
 footer {
@@ -63,4 +63,18 @@ h2{
 #table-points_club{
     width: 60%;
     margin: auto;
+}
+
+#welcome{
+    text-align: right;
+    color: #f44336; 
+    font-family: serif;
+    font-size: 25px;
+}
+
+.cont-welcome{
+    /* background: floralwhite; */
+    margin-top: 6%;
+    margin-bottom: 6%;
+    margin-left: 2%;
 }

@@ -1,9 +1,10 @@
 from app import app
-from server import loadClubs, loadCompetitions
+from server import loadClubs, loadCompetitions, loadCompetitionsEssai
 from flask import render_template, redirect, flash, request, url_for, session
 
 competitions = loadCompetitions()
 clubs = loadClubs()
+competitions_essai = loadCompetitionsEssai()
 MAX_POINTS = 12
 
 @app.route('/', methods=['GET'])
@@ -18,7 +19,7 @@ def showSummary():
             club = [club for club in clubs if club['email'] == request.form['email']][0]
             user= request.form['email']
             session["user"] = user
-            return render_template('welcome.html', club=club, competitions=competitions, user=user)
+            return render_template('welcome.html', club=club, competitions_essai=competitions, user=user)
         except:
             if request.form['email'] == '':
                 flash('Please, enter your email address.', 'warning')
@@ -31,8 +32,9 @@ def showSummary():
 def book(competition,club):
     foundClub = [c for c in clubs if c['name'] == club][0]
     foundCompetition = [c for c in competitions if c['name'] == competition][0]
+
     if foundClub and foundCompetition:
-        return render_template('booking.html',club=foundClub,competition=foundCompetition)
+        return render_template('booking.html', club=foundClub, competition=foundCompetition)
     else:
         flash("Something went wrong-please try again")
         return render_template('welcome.html', club=club, competitions=competitions)
@@ -51,11 +53,11 @@ def purchasePlaces():
         return render_template('booking.html',club=club, competition=competition)
     # Required places greater than those available for the competition
     elif places_required > places_available:
-        flash(f'Error! you try to reserve more places than are available for this competition. {places_available} vacancies remain.', 'danger')
+        flash(f"Error! you try to reserve more places than are available for this competition. {places_available} vacancies remain.", 'danger')
         return render_template('booking.html', club=club, competition=competition)
     # Places greater than 12 because the maximum per club is 12
     elif places_required > MAX_POINTS:
-        flash(f'Sorry! It is only possible to reserve between 0 and {MAX_POINTS} places in each competition.', 'warning')
+        flash(f"Sorry! It is only possible to reserve between 0 and {MAX_POINTS} places in each competition.", 'warning')
         return render_template('booking.html', club=club, competition=competition)
     # Reserve 0 places or negative
     elif places_required <= 0:

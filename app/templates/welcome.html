@@ -35,19 +35,30 @@
                 </tr>
               </thead>
               <tbody>
-                {% for comp in competitions %}
+                {% for comp in competitions_essai %}
                 <tr>
+                {% if (comp['numberOfPlaces']|int >0) and ( comp['in_the_past'] != True ) %}
                   <td>{{comp['name']}}</td> 
                   <td>{{comp['date']}}</td>
                   <td>{{comp['numberOfPlaces']}}</td>    
-                {% if comp['numberOfPlaces']|int >0 %}
                   <td><a href="{{ url_for('book',competition=comp['name'],club=club['name']) }}">Book Places</a></td>
-                {% endif %}  
+                {% endif %}
                 </tr>
                 {% endfor %}
-    
               </tbody>
         </table>
+        <hr>
+                
+        <h5 class="mb-3 mt-4"><u>List of past competitions</u></h5>
+        {% for comp in competitions_essai %}
+        <ul>
+          {% if (comp['numberOfPlaces']|int >0) and ( comp['in_the_past'] != False ) %}
+          <li>
+            <strong>{{comp['name']}}</strong> :  {{comp['date']}} | {{comp['numberOfPlaces']}} places |
+          </li>
+          {% endif %}
+        </ul> 
+        {% endfor %}         
 
     </div>
 

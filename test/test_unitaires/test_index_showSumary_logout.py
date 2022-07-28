@@ -1,15 +1,19 @@
-# from test.conftest import client
-from flask import session, url_for, request
+expected_flash_invalid_mail_message = 'Sorry, that email is not valid. Please try again.'
+expected_flash_empty_mail_message = 'Please, enter your email address.'
 
-expected_flash_invalid_mail_message = '<h5>Sorry, that email is not valid. Please try again.</h5>'
-expected_flash_empty_mail_message = '<h5>Please, enter your email address.</h5>'
-
-def test_index(client):
+def test_index(client, club_fixture):
     response = client.get('/')
+    data = response.data.decode()
+    assert club_fixture["name"] in data
+    assert club_fixture["points"] in data
     assert response.status_code == 200
+
+def test_showSumary(client):
+    response = client.get("/showSummary")
+    assert response.status_code == 405
   
-def test_showSummary_valid_mail(client):
-    response = client.post("/showSummary", data={"email": "john@simplylift.co"})
+def test_showSummary_valid_mail(client, club_fixture):
+    response = client.post("/showSummary", data={"email": club_fixture["email"]})
     assert response.status_code == 200
 
 def test_showSummary_invalid_mail(client):

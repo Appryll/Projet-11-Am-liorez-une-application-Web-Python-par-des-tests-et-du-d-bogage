@@ -54,7 +54,7 @@ def purchasePlaces():
         return render_template('booking.html',club=club, competition=competition)
     # Required places greater than those available for the competition
     elif places_required > places_available:
-        flash(f"Error! you try to reserve more places than are available for this competition.", 'danger')
+        flash('Error! you try to reserve more places than are available for this competition.', 'danger')
         return render_template('booking.html', club=club, competition=competition)
     # Places greater than 12 because the maximum per club is 12
     elif places_required > MAX_POINTS:

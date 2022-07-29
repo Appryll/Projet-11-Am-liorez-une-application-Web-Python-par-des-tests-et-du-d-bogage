@@ -3,7 +3,6 @@ from app.views import MAX_POINTS
 expected_flash_great_booking = "Great-booking complete!."
 expected_flash_points_negative = "Error! You cannot reserve null or negative places."
 expected_flash_points_sup_club_inf_competition = "Error! You try to use more places than you have available."
-expected_flash_points_sup_max_points = f'Sorry! It is only possible to reserve between 0 and {MAX_POINTS} places in each competition.'
 
 def test_purchase_places(client):
     response = client.get("/purchasePlaces")
@@ -34,8 +33,8 @@ def test_purchase_places_sup_max_points(client, club_fixture, competition_fixtur
     places = MAX_POINTS + 1
     response = client.post("/purchasePlaces", data={"competition": competition_fixture["name"], "club": club_fixture["name"], "places": places })
     assert response.status_code == 200
-    data = response.data
-    # assert expected_flash_points_sup_max_points in data
+    data = response.data.decode()
+    #assert "Sorry! It is only possible to reserve between 0 and {MAX_POINTS} places in each competition." in data
 
 def test_purchase_places_sup_competition(client, club_fixture, competition_fixture):
     places = int(competition_fixture["numberOfPlaces"]) + 1
@@ -44,14 +43,15 @@ def test_purchase_places_sup_competition(client, club_fixture, competition_fixtu
     data = response.data.decode()
     assert "Error! you try to reserve more places than are available for this competition." in data
 
-def test_book(client, club_fixture, competition_fixture):
+def test_book_url_ok(client, club_fixture, competition_fixture):
     club = club_fixture["name"]
     competition = competition_fixture["name"]
-    try:
-        response = client.get(f'/book/{competition}/{club}', follow_redirects=True)
-        assert response.status_code == 200
-    except:
-        data = response.data.decode()
-        assert response.status_code == 404
-        assert "Something went wrong-please try again" in data  
-        assert response.request.path == "/showSummary"
+    response = client.get(f'/book/{competition}/{club}')
+    assert response.status_code == 200
+
+# def test_book_url_ok(client, club_fixture, competition_fixture_error):
+#     response = client.get(f'/book/{competition_fixture_error["name"]}/{club_fixture["name"]}', follow_redirects=True)
+#     data = response.data.decode()
+#     assert response.status_code == 404
+#     assert "Something went wrong-please try again" in data  
+    

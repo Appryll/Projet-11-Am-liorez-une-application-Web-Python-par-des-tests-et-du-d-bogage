@@ -1,11 +1,12 @@
 from app import app
-from server import loadClubs, loadCompetitions, loadCompetitionsEssai
+from server import loadClubs, loadCompetitionsEssai
 from flask import render_template, redirect, flash, request, url_for, session
 
-competitions = loadCompetitions()
+# competitions = loadCompetitions()
+competitions = loadCompetitionsEssai()
 clubs = loadClubs()
-competitions_essai = loadCompetitionsEssai()
 MAX_POINTS = 12
+# 3 points (club) -> 1 place (competition)
 
 @app.route('/', methods=['GET'])
 def index():
@@ -19,7 +20,7 @@ def showSummary():
             club = [club for club in clubs if club['email'] == request.form['email']][0]
             user= request.form['email']
             session["user"] = user
-            return render_template('welcome.html', club=club, competitions_essai=competitions, user=user)
+            return render_template('welcome.html', club=club, competitions=competitions, user=user)
         except:
             if request.form['email'] == '':
                 flash('Please, enter your email address.', 'warning')
@@ -65,7 +66,7 @@ def purchasePlaces():
         return render_template('booking.html', club=club, competition=competition)
     else:
         flash('Great-booking complete!.', 'info')
-        club['points'] = int(club['points']) - places_required
+        club['points'] = int(club['points']) - places_required * 3
         competition['numberOfPlaces'] = int(competition['numberOfPlaces']) - places_required
         return render_template('welcome.html', club=club, competitions=competitions)
 

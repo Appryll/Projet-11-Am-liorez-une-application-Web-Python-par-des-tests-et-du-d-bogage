@@ -5,7 +5,6 @@ def loadClubs():
          listOfClubs = json.load(c)['clubs']
          return listOfClubs
          
-
 def loadCompetitions():
     with open('competitions.json') as comps:
         listOfCompetitions = json.load(comps)['competitions']
@@ -13,12 +12,12 @@ def loadCompetitions():
 
 def loadCompetitionsEssai():
     with open('competitions_essai.json') as comps:
-        listOfCompetitionsEssai = json.load(comps)['competitions_essai']
+        listOfCompetitions = json.load(comps)['competitions']
         date_format = "%Y-%m-%d %H:%M:%S"
-        for competitions_essai in listOfCompetitionsEssai:
-            competitions_essai['date'] = datetime.datetime.strptime(competitions_essai["date"], date_format)
-            if competitions_essai['date'] < datetime.datetime.now():
-                competitions_essai['in_the_past'] = True
+        for competitions in listOfCompetitions:
+            competitions['date'] = datetime.datetime.strptime(competitions["date"], date_format)
+            if competitions['date'] < datetime.datetime.now():
+                competitions['in_the_past'] = True
             else:
-                competitions_essai['in_the_past'] = False              
-        return listOfCompetitionsEssai
+                competitions['in_the_past'] = False              
+        return listOfCompetitions

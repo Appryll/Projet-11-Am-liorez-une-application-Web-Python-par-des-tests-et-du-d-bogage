@@ -64,8 +64,7 @@ Dans le terminal, naviguer vers le dossier souhaité.
     deactivate
 
 ------------------------------------------------------------------------------------------------------------------------
-## Améliorations concernant la phase 3: 
+## Améliorations concernant Phase 3: 
 
 - Bouton "return" dans 'booking'
 - Bouton "return" dans 'list of points available for each club'
-- 

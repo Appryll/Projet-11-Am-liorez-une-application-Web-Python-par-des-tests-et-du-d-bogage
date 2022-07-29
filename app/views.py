@@ -1,8 +1,8 @@
 from app import app
-from server import loadClubs, loadCompetitionsEssai
+from server import loadClubs, loadCompetitionsEssai, loadCompetitions
 from flask import render_template, redirect, flash, request, url_for, session
 
-# competitions = loadCompetitions()
+competitions_bd = loadCompetitions()
 competitions = loadCompetitionsEssai()
 clubs = loadClubs()
 MAX_POINTS = 12
@@ -31,14 +31,13 @@ def showSummary():
 
 @app.route('/book/<competition>/<club>')
 def book(competition,club):
-    foundClub = [c for c in clubs if c['name'] == club][0]
-    foundCompetition = [c for c in competitions if c['name'] == competition][0]
-
-    if foundClub and foundCompetition:
-        return render_template('booking.html', club=foundClub, competition=foundCompetition)
-    else:
-        flash("Something went wrong-please try again")
-        return render_template('welcome.html', club=club, competitions=competitions)
+    found_club = [c for c in clubs if c['name'] == club][0]
+    try:
+        found_competition = [c for c in competitions if c['name'] == competition][0]
+        return render_template('booking.html', club=found_club, competition=found_competition)
+    except:
+        flash("Something went wrong-please try again", 'danger'), 404
+    return render_template('welcome.html', club=found_club, competitions=competitions)
 
 
 @app.route('/purchasePlaces', methods=['POST'])

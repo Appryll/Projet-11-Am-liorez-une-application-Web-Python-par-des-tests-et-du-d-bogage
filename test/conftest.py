@@ -19,3 +19,10 @@ def competition_fixture():
                 "date": "2020-03-27 10:00:00",
                 "numberOfPlaces": "25"}
     return data_competition
+
+@pytest.fixture
+def competition_fixture_error():
+    data_competition = {"name": "Spring",
+                "date": "2020-03-27 10:00:00",
+                "numberOfPlaces": "25"}
+    return data_competition

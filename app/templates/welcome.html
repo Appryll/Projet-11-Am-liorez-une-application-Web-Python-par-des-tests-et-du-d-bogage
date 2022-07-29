@@ -35,7 +35,7 @@
                 </tr>
               </thead>
               <tbody>
-                {% for comp in competitions_essai %}
+                {% for comp in competitions %}
                 <tr>
                 {% if (comp['numberOfPlaces']|int >0) and ( comp['in_the_past'] != True ) %}
                   <td>{{comp['name']}}</td> 
@@ -50,7 +50,7 @@
         <hr>
                 
         <h5 class="mb-3 mt-4"><u>List of past competitions</u></h5>
-        {% for comp in competitions_essai %}
+        {% for comp in competitions %}
         <ul>
           {% if (comp['numberOfPlaces']|int >0) and ( comp['in_the_past'] != False ) %}
           <li>

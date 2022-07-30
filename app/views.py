@@ -48,7 +48,7 @@ def purchasePlaces():
     places_available = int(competition['numberOfPlaces'])
 
     # Places required greater than those available by the club and less than or equal to the places for the competition
-    if places_required > int(club['points']) and places_required <= places_available:
+    if places_required * 3 > int(club['points']) and places_required <= places_available:
         flash('Error! You try to use more places than you have available.', 'danger')
         return render_template('booking.html',club=club, competition=competition)
     # Required places greater than those available for the competition
